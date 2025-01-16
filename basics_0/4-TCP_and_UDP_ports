@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# This script lists all the TCP and UDP ports that are open
-netstat -lp
+# Script to display listening TCP and UDP ports with  PID and program name
+
+netstat -l --program
