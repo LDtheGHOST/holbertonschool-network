@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
-# this script will change your home IP address to localhost and fcebook
+# Script to configure /etc/hosts with custom DNS entries
 
-# backup the hosts file
-cp /etc/hosts /etc/hosts.bak
+# Backup the original /etc/hosts file with sudo to ensure we have the necessary permissions
+sudo cp /etc/hosts /etc/hosts.bak
 
-
-# change the IP address in the hosts file and facebook
-sed -i '/127.0.0.1\s\+localhost/s/^/#/' /etc/hosts
+# Add or update the localhost entry (127.0.0.1)
+# Comment out any existing localhost entries
+sudo sed -i '/127\.0\.0\.1[[:space:]]\+localhost/s/^/#/' /etc/hosts
+# Add the new localhost entry
 echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
 
-sed -i '/faceboock.com/s/^/#/' /etc/hosts
+# Add or update the facebook.com entry
+# Comment out any existing facebook.com entries
+sudo sed -i '/facebook\.com/s/^/#/' /etc/hosts
+# Add the new facebook.com entry
 echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
 
+echo "Configuration complete. /etc/hosts has been updated."
 
-ping -c 1 localhost
-ping -c 1 facebook.com
-
-
-echo "configuration complete. /etc/hosts file has been updated"
